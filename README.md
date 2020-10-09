@@ -1,5 +1,7 @@
 ## ====================== Setup extentions tools ====================
 
+intro tutorial: https://code.visualstudio.com/api/get-started/your-first-extension
+
 # npm install -g vsce
 
 # npm install -g yarn
@@ -12,6 +14,8 @@ Just removed that line and it all worked fine! Extension is called surround-with
 # setup fields from https://code.visualstudio.com/api/references/extension-manifest
 
 # follow https://code.visualstudio.com/api/working-with-extensions/publishing-extension
+cd myExtension
+$ vsce package
 
 ## =====================================================
 

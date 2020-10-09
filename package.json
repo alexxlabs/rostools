@@ -1,6 +1,7 @@
 {
 	"name": "rostools",
 	"publisher": "alexxlabs",
+	"license": "SEE LICENSE IN LICENSE",
 	"displayName": "rostools",
 	"description": "Mikrotik RouterOS config tools",
 	"version": "0.0.1",
@@ -15,14 +16,18 @@
 		"Other"
 	],
 	"activationEvents": [
-		"onCommand:rostools.helloWorld"
+		"*"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
 		"commands": [
 			{
-				"command": "rostools.helloWorld",
-				"title": "Hello World"
+				"command": "rostools.helloworld",
+				"title": "rostools - helloworld"
+			},
+			{
+				"command": "rostools.push",
+				"title": "rostools - push"
 			}
 		]
 	},

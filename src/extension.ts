@@ -15,30 +15,43 @@ registerCommand — регистрирует команду в глобальн�
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
+	//let rostools_log_channel = vscode.window.createOutputChannel("rostools_log_channel");
+	//rostools_log_channel.appendLine("empty log str");
 
 	// Use the console to output diagnostic information (console.log) and errors (console.error)
 	// This line of code will only be executed once when your extension is activated
-	console.log('Congratulations, your extension "rosconfig" is now active!');
+	console.log('Congratulations, your extension "rostools" is now active!');
+
+	// https://stackoverflow.com/questions/55135876/extension-api-task-provider-build-task-example
 
 	// The command has been defined in the package.json file
 	// Now provide the implementation of the command with registerCommand
 	// The commandId parameter must match the command field in package.json
-	let disposable = vscode.commands.registerCommand('rosconfig.helloWorld', () => {
-		// The code you place here will be executed every time your command is executed
-
-		// Display a message box to the user
-		vscode.window.showInformationMessage('Hello World from rosconfig!');
+	let disposable = vscode.commands.registerCommand('rostools.helloworld', () => {
+		vscode.window.showInformationMessage('Hello World from rostools!');
 	});
 	context.subscriptions.push(disposable);
 
-	let convert = vscode.commands.registerTextEditorCommand('rosconfig.convert', (textEditor) => {
-		// Обычный объект, где имена свойств совпадают с теми, что были обозначены в манифесте.
-		const options = vscode.workspace.getConfiguration('rosconfig');
+	let srcpush = vscode.commands.registerTextEditorCommand('rostools.push', (textEditor) => {
+		let options = vscode.workspace.getConfiguration('rostools');
+		vscode.window.showQuickPick(options.configs, {
+			placeHolder : "Select host:",
+			/*onDidSelectItem: (item: vscode.QuickPickItem) => {
+				vscode.window.showInformationMessage(item.label)
+			}*/
+		}).then(item => {
+			if (!item || !item.port) {return;}
+			//vscode.commands.executeCommand("Jenkins." + hostname + ".openInJenkins");
+			console.log(item.port);
+			// Текст открытого файла.
+			//const cfg_src = textEditor.document.getText();
+			//vscode.window.showInformationMessage(cfg_src);
 
-		// Текст открытого файла.
-		const text = textEditor.document.getText();
+			vscode.commands.executeCommand("workbench.action.tasks.runTask", "Task Name");
+		});
+
 	});
-	context.subscriptions.push(convert);
+	context.subscriptions.push(srcpush);
 }
 
 // this method is called when your extension is deactivated
